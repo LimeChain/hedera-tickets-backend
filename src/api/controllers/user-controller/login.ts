@@ -1,7 +1,6 @@
 import { Credentials, HederaAccount } from '../../types'
 
 import { UserModel } from '../../database/models'
-import { PasswordService } from './../../services'
 
 export class Login {
     public readonly credentials: Credentials

@@ -23,6 +23,7 @@ class BasicAuthorization {
             })
 
             if (PasswordService.compare(req.body.password, user.password)) {
+                req.user = user
                 return next()
             }
 

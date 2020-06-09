@@ -24,6 +24,7 @@
     "@types/mongoose": "^5.7.23",
     "@types/node": "^14.0.12",
     "bcryptjs": "^2.4.3",
+    "bignumber.js": "^9.0.0",
     "crypto-js": "^4.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.18"
