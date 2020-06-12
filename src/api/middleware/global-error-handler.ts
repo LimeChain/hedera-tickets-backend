@@ -6,11 +6,8 @@
 // Errors Handler works for already routed app
 // It's purpose is to handle routes and middleware errors
 
-import { getLoggerFor } from '../services/logger'
-
 class AppErrorsHandler {
     private app: any;
-    private logger = getLoggerFor(this.constructor.name)
 
     public constructor (app: any) {
         this.app = app
@@ -63,7 +60,7 @@ class AppErrorsHandler {
                 if (error.isExpectable) {
                     res.status(400).send(error.message)
                 } else {
-                    this.logger.error(error)
+                    console.log(error);
                     res.status(500).send('Something went wrong')
                 }
             }

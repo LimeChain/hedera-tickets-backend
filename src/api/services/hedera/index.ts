@@ -56,7 +56,7 @@ class HederaService {
 
         const transactionId = await new AccountCreateTransaction()
             .setKey(privateKey.publicKey)
-            .setInitialBalance(new Hbar(20))
+            .setInitialBalance(new Hbar(1000))
             .execute(this.client)
 
         const txReceipt = await transactionId.getReceipt(this.client)
@@ -68,9 +68,11 @@ class HederaService {
         }
     }
 
-    /* Event Store contract functionality */
-    public async groups (contractID: string): Promise<string> {
-        return ""
+    public async lastPrice (group: number, contractID: string) {
+        const fnParams = new ContractFunctionParams().addUint256(new BigNumber(group));
+
+        const result = await this.read(contractID, 'groups', fnParams);
+        return result.getUint256(3).toString()
     }
 
     public async orgCommission (contractID: string): Promise<string> {
@@ -86,7 +88,7 @@ class HederaService {
     private async read (contractID: string, functionName: string, args: ContractFunctionParams) {
         return new ContractCallQuery()
             .setContractId(contractID)
-            .setGas(1000)
+            .setGas(200000)
             .setFunction(functionName, args)
             .execute(this.client)
     }

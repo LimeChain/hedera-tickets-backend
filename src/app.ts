@@ -7,14 +7,14 @@ import cors from 'cors'
 
 import { registerApiRoutes } from './api/routes/api-router'
 import APIErrorHandler from './api/middleware/global-error-handler'
-import { getLoggerFor } from './api/services/logger'
+
+import { DBConfig } from './api/database'
 
 export class APIServer {
     public static readonly PORT: number = 80
     private app: express.Application
     private server: Server
     private port: string | number
-    private logger = getLoggerFor(this.constructor.name)
 
     public constructor () {
         this.createApp()
@@ -37,6 +37,8 @@ export class APIServer {
         this.app.use(bodyParser.urlencoded({ extended: true }))
         this.app.use(lusca.xframe('SAMEORIGIN'))
         this.app.use(lusca.xssProtection(true))
+
+        DBConfig.connect();
     }
 
     private createServer (): void {
@@ -56,8 +58,7 @@ export class APIServer {
         this.server.listen(this.port, async () => {
             console.log('  App is running at http://localhost:%d in %s mode', this.port, process.env.NODE_ENV)
             console.log('  Press CTRL-C to stop\n')
-
-            this.logger.info(`Service has started  App is running at http://localhost:${this.port} in ${process.env.NODE_ENV} mode`)
+            console.log(`Service has started  App is running at http://localhost:${this.port} in ${process.env.NODE_ENV} mode`)
         })
     }
 

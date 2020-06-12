@@ -14,13 +14,13 @@ export class Register {
 
     public async user (): Promise<HederaAccount> {
         const chainAccount = await HederaService.createAccount()
-
-        this.userData.hederaAccount.name = chainAccount.name
-        this.userData.hederaAccount.key = AES.encrypt(
-            chainAccount.privateKey,
-            this.userData.password
-        ).toString()
-
+        this.userData.hederaAccount = {
+            name: chainAccount.name.toString(),
+            key: AES.encrypt(
+                chainAccount.privateKey,
+                this.userData.password
+            ).toString()
+        }
         this.userData.password = PasswordService.hashPassword(this.userData.password);
 
         await UserModel.create(this.userData);

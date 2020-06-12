@@ -1,12 +1,10 @@
-import * as mongoose from 'mongoose'
+import { connect } from 'mongoose'
 
-class DBConfig {
+export class DBConfig {
 
     static connect () {
-        mongoose.connect(process.env.DB_CONNECTION, {
+        connect(process.env.DB_CONNECTION, {
             useNewUrlParser: true
         });
     }
 }
-
-module.exports = DBConfig;
