@@ -1,3 +1,5 @@
+<p align="center"><i><img src="./EventCo.png"> </i><p>
+
 # EventCo Tickets API
 
 ![App-architecture](./TicketsArchitecture.png)
