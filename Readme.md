@@ -1,4 +1,4 @@
-# Hedera Tickets API
+# EventCo Tickets API
 
 ![App-architecture](./TicketsArchitecture.png)
 
